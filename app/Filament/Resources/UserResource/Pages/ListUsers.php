@@ -2,10 +2,12 @@
 
 namespace App\Filament\Resources\UserResource\Pages;
 
+use App\Filament\Exports\UserExporter;
 use App\Filament\Resources\UserResource;
 use Filament\Actions;
 use Filament\Resources\Pages\ListRecords;
 use Filament\Tables;
+use Filament\Tables\Actions\ExportAction;
 use Filament\Tables\Table;
 use Illuminate\Support\Str;
 use Ysfkaya\FilamentPhoneInput\PhoneInputNumberType;
@@ -24,6 +26,10 @@ class ListUsers extends ListRecords
     public function table(Table $table): Table
     {
         return $table
+            ->headerActions([
+                ExportAction::make()
+                    ->exporter(UserExporter::class)
+            ])
             ->columns([
                 Tables\Columns\TextColumn::make('id')
                     ->label('ID')
