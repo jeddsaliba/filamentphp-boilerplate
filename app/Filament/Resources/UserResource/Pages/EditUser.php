@@ -3,7 +3,6 @@
 namespace App\Filament\Resources\UserResource\Pages;
 
 use App\Filament\Resources\UserResource;
-use App\Models\User;
 use Filament\Actions;
 use Filament\Resources\Pages\EditRecord;
 use Illuminate\Database\Eloquent\Model;
@@ -29,6 +28,12 @@ class EditUser extends EditRecord
                     ->hidden(function (Model $record) {
                         return $record->getKey() == Auth::id();
                     }),
+                Actions\ActionGroup::make([
+                    \Parallax\FilamentComments\Actions\CommentsAction::make(),
+                    \Rmsramos\Activitylog\Actions\ActivityLogTimelineSimpleAction::make()
+                        ->label('Activity Logs')
+                        ->withRelations(['userProfile']),
+                ])->dropdown(false)
             ]),
         ];
     }

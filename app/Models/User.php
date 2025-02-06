@@ -16,15 +16,15 @@ use Illuminate\Database\Eloquent\Relations\MorphOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Parallax\FilamentComments\Models\Traits\HasFilamentComments;
 use Spatie\MediaLibrary\HasMedia;
-use Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable implements FilamentUser, HasAvatar, HasMedia
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasActivityLogs, HasFactory, HasMediaConvertionRegistrations, HasPanelShield, HasRoles, Notifiable, SoftDeletes;
+    use HasActivityLogs, HasFactory, HasFilamentComments, HasMediaConvertionRegistrations, HasPanelShield, HasRoles, Notifiable, SoftDeletes;
 
     /**
      * The attributes that are mass assignable.

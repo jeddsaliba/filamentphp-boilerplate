@@ -11,7 +11,6 @@ use Filament\AvatarProviders\UiAvatarsProvider;
 use Filament\Resources\Pages\ListRecords;
 use Filament\Tables;
 use Filament\Tables\Actions\ExportAction;
-use Filament\Tables\Enums\FiltersLayout;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
@@ -86,8 +85,16 @@ class ListUsers extends ListRecords
                 Tables\Filters\TrashedFilter::make(),
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
+                Tables\Actions\ActionGroup::make([
+                    Tables\Actions\EditAction::make(),
+                    Tables\Actions\DeleteAction::make(),
+                    Tables\Actions\ActionGroup::make([
+                        \Parallax\FilamentComments\Tables\Actions\CommentsAction::make(),
+                        \Rmsramos\Activitylog\Actions\ActivityLogTimelineTableAction::make()
+                            ->label('Activity Logs')
+                            ->withRelations(['userProfile'])
+                    ])->dropdown(false)
+                ]),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
