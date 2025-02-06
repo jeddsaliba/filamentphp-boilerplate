@@ -47,7 +47,7 @@ trait HasForm
                 ->unique(ignoreRecord: true)
                 ->required(),
             Forms\Components\Group::make()
-                ->relationship('profile')
+                ->relationship('userProfile')
                 ->schema([
                     \Ysfkaya\FilamentPhoneInput\Forms\PhoneInput::make('phone'),
                     Forms\Components\DatePicker::make('birthdate'),

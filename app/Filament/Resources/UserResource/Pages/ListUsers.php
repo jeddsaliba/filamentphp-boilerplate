@@ -57,13 +57,13 @@ class ListUsers extends ListRecords
                     ->searchable()
                     ->sortable()
                     ->toggleable(),
-                \Ysfkaya\FilamentPhoneInput\Tables\PhoneColumn::make('profile.phone')
+                \Ysfkaya\FilamentPhoneInput\Tables\PhoneColumn::make('userProfile.phone')
                     ->label('Phone')
                     ->searchable()
                     ->sortable()
                     ->toggleable()
                     ->displayFormat(PhoneInputNumberType::INTERNATIONAL),
-                Tables\Columns\TextColumn::make('profile.birthdate')
+                Tables\Columns\TextColumn::make('userProfile.birthdate')
                     ->label('Birthdate')
                     ->date(config('filament.date_format'))
                     ->searchable()

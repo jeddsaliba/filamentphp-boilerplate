@@ -60,7 +60,7 @@ class User extends Authenticatable implements FilamentUser, HasAvatar, HasMedia
         ];
     }
 
-    public function profile(): HasOne
+    public function userProfile(): HasOne
     {
         return $this->hasOne(UserProfile::class);
     }

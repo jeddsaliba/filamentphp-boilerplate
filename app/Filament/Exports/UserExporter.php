@@ -18,9 +18,9 @@ class UserExporter extends Exporter
                 ->label('ID'),
             ExportColumn::make('name'),
             ExportColumn::make('email'),
-            ExportColumn::make('profile.phone')
+            ExportColumn::make('userProfile.phone')
                 ->label('Phone'),
-            ExportColumn::make('profile.birthdate')
+            ExportColumn::make('userProfile.birthdate')
                 ->label('Birthdate'),
             ExportColumn::make('created_at'),
             ExportColumn::make('updated_at'),
