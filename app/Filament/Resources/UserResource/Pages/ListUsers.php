@@ -2,13 +2,18 @@
 
 namespace App\Filament\Resources\UserResource\Pages;
 
+use App\Enums\MediaCollectionType;
+use App\Enums\MediaConversion;
 use App\Filament\Exports\UserExporter;
 use App\Filament\Resources\UserResource;
 use Filament\Actions;
+use Filament\AvatarProviders\UiAvatarsProvider;
 use Filament\Resources\Pages\ListRecords;
 use Filament\Tables;
 use Filament\Tables\Actions\ExportAction;
+use Filament\Tables\Enums\FiltersLayout;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 use Ysfkaya\FilamentPhoneInput\PhoneInputNumberType;
 
@@ -35,6 +40,11 @@ class ListUsers extends ListRecords
                     ->label('ID')
                     ->searchable()
                     ->sortable(),
+                Tables\Columns\SpatieMediaLibraryImageColumn::make('photo')
+                    ->collection(MediaCollectionType::USER_PROFILE->value)
+                    ->circular()
+                    ->conversion(MediaConversion::SM->value)
+                    ->defaultImageUrl(fn (Model $record) => app(UiAvatarsProvider::class)->get($record)),
                 Tables\Columns\TextColumn::make('name')
                     ->searchable()
                     ->sortable(),

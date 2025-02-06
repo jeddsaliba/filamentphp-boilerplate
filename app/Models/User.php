@@ -4,20 +4,27 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 
+use App\Enums\MediaCollectionType;
 use App\Models\Traits\HasActivityLogs;
+use App\Models\Traits\HasMediaConvertionRegistrations;
 use BezhanSalleh\FilamentShield\Traits\HasPanelShield;
 use Filament\Models\Contracts\FilamentUser;
+use Filament\Models\Contracts\HasAvatar;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\MorphOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Spatie\Permission\Traits\HasRoles;
 
-class User extends Authenticatable implements FilamentUser
+class User extends Authenticatable implements FilamentUser, HasAvatar, HasMedia
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasActivityLogs, HasFactory, HasPanelShield, HasRoles, Notifiable, SoftDeletes;
+    use HasActivityLogs, HasFactory, HasMediaConvertionRegistrations, HasPanelShield, HasRoles, Notifiable, SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
@@ -56,5 +63,25 @@ class User extends Authenticatable implements FilamentUser
     public function profile(): HasOne
     {
         return $this->hasOne(UserProfile::class);
+    }
+
+    /**
+     * Register media collections
+     */
+    public function registerMediaCollections(): void
+    {
+        $this->addMediaCollection(MediaCollectionType::USER_PROFILE->value)
+            ->registerMediaConversions($this->modelMediaConvertionRegistrations());
+    }
+
+    public function avatar(): MorphOne
+    {
+        return $this->morphOne(Media::class, 'model')
+            ->where('collection_name', MediaCollectionType::USER_PROFILE);
+    }
+
+    public function getFilamentAvatarUrl(): ?string
+    {
+        return $this->avatar?->getFullUrl();
     }
 }

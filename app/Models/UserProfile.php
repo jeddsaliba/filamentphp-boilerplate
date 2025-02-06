@@ -2,16 +2,15 @@
 
 namespace App\Models;
 
+use App\Models\Traits\HasActivityLogs;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Spatie\Activitylog\LogOptions;
-use Spatie\Activitylog\Traits\LogsActivity;
 
 class UserProfile extends Model
 {
-    use HasFactory, LogsActivity, SoftDeletes;
+    use HasActivityLogs, HasFactory, SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
@@ -34,12 +33,6 @@ class UserProfile extends Model
             'phone' => 'string',
             'birthdate' => 'date',
         ];
-    }
-
-    public function getActivitylogOptions(): LogOptions
-    {
-        return LogOptions::defaults()
-            ->logOnly($this->fillable);
     }
 
     public function user(): BelongsTo

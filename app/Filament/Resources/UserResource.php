@@ -5,6 +5,7 @@ namespace App\Filament\Resources;
 use App\Enums\NavGroup;
 use App\Filament\Resources\UserResource\Pages;
 use App\Filament\Resources\UserResource\Traits\HasForm;
+use App\Filament\Resources\UserResource\Traits\HasNavigationBadge;
 use App\Models\User;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -13,7 +14,7 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class UserResource extends Resource
 {
-    use HasForm;
+    use HasForm, HasNavigationBadge;
 
     protected static ?string $model = User::class;
 

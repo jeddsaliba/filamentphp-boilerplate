@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\UserResource\Traits;
 
+use App\Enums\MediaCollectionType;
 use App\Jobs\ResetPassword;
 use BezhanSalleh\FilamentShield\Support\Utils;
 use Filament\Forms;
@@ -34,6 +35,11 @@ trait HasForm
     public static function basicInformationForm(): array
     {
         return [
+            Forms\Components\Grid::make(4)
+                ->schema([
+                    Forms\Components\SpatieMediaLibraryFileUpload::make('avatar')
+                        ->collection(MediaCollectionType::USER_PROFILE->value),
+                ])->columnSpanFull(),
             Forms\Components\TextInput::make('name')
                 ->label('Name')
                 ->required(),

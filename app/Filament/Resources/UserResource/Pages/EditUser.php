@@ -3,8 +3,11 @@
 namespace App\Filament\Resources\UserResource\Pages;
 
 use App\Filament\Resources\UserResource;
+use App\Models\User;
 use Filament\Actions;
 use Filament\Resources\Pages\EditRecord;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 
 class EditUser extends EditRecord
 {
@@ -14,9 +17,18 @@ class EditUser extends EditRecord
     {
         return [
             Actions\ActionGroup::make([
-                Actions\DeleteAction::make(),
-                Actions\ForceDeleteAction::make(),
-                Actions\RestoreAction::make(),
+                Actions\DeleteAction::make()
+                    ->hidden(function (Model $record) {
+                        return $record->getKey() == Auth::id();
+                    }),
+                Actions\ForceDeleteAction::make()
+                    ->hidden(function (Model $record) {
+                        return $record->getKey() == Auth::id();
+                    }),
+                Actions\RestoreAction::make()
+                    ->hidden(function (Model $record) {
+                        return $record->getKey() == Auth::id();
+                    }),
             ]),
         ];
     }
