@@ -38,7 +38,8 @@ trait HasForm
             Forms\Components\Grid::make(4)
                 ->schema([
                     Forms\Components\SpatieMediaLibraryFileUpload::make('avatar')
-                        ->collection(MediaCollectionType::USER_PROFILE->value),
+                        ->collection(MediaCollectionType::USER_PROFILE->value)
+                        ->avatar(),
                 ])->columnSpanFull(),
             Forms\Components\TextInput::make('name')
                 ->label('Name')

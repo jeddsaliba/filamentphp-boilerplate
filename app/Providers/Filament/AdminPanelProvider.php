@@ -2,8 +2,12 @@
 
 namespace App\Providers\Filament;
 
+use App\Enums\MediaCollectionType;
 use App\Enums\NavGroup;
 use App\Filament\Pages\Auth\Register;
+use App\Models\User;
+use Filament\Forms\Components\BaseFileUpload;
+use Filament\Forms\Components\FileUpload;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;
@@ -20,7 +24,10 @@ use Illuminate\Cookie\Middleware\EncryptCookies;
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\StartSession;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
+use Livewire\Features\SupportFileUploads\TemporaryUploadedFile;
 
 class AdminPanelProvider extends PanelProvider
 {
@@ -64,6 +71,38 @@ class AdminPanelProvider extends PanelProvider
             ->plugins([
                 \BezhanSalleh\FilamentShield\FilamentShieldPlugin::make(),
                 \CharrafiMed\GlobalSearchModal\GlobalSearchModalPlugin::make(),
+                \Jeffgreco13\FilamentBreezy\BreezyCore::make()
+                    ->myProfile(
+                        shouldRegisterUserMenu: true, // Sets the 'account' link in the panel User Menu (default = true)
+                        userMenuLabel: 'My Profile', // Customizes the 'account' link label in the panel User Menu (default = null)
+                        shouldRegisterNavigation: false, // Adds a main navigation item for the My Profile page (default = false)
+                        navigationGroup: null, // Sets the navigation group for the My Profile page (default = null)
+                        hasAvatars: true, // Enables the avatar upload form component (default = false)
+                        slug: 'profile' // Sets the slug for the profile page (default = 'my-profile')
+                    )
+                    ->enableTwoFactorAuthentication(
+                        force: true, // force the user to enable 2FA before they can use the application (default = false)
+                    )
+                    ->avatarUploadComponent(function (FileUpload $fileUpload) {
+                        return $fileUpload
+                            ->afterStateHydrated(function (BaseFileUpload $component) {
+                                $user = User::find(Auth::id());
+                                $file = $user->getFirstMedia(MediaCollectionType::USER_PROFILE->value);
+                                if (!$file) {
+                                    $component->state([]);
+                                    return;
+                                }
+                                $component->state([((string) Str::uuid()) => $file->getKey() . '/' . $file->file_name]);
+                            })
+                            ->saveUploadedFileUsing(function (TemporaryUploadedFile $file) {
+                                $user = User::find(Auth::id());
+                                $user->clearMediaCollection(MediaCollectionType::USER_PROFILE->value);
+                                $user->addMedia($file->path())->toMediaCollection(MediaCollectionType::USER_PROFILE->value);
+                                $file = $user->getFirstMedia(MediaCollectionType::USER_PROFILE->value);
+                                if (!$file) return null;
+                                return $file->getKey() . '/' . $file->file_name;
+                            });
+                    }),
                 \Rmsramos\Activitylog\ActivitylogPlugin::make()
                     ->navigationCountBadge(),
             ])

@@ -39,7 +39,7 @@ class ListUsers extends ListRecords
                     ->label('ID')
                     ->searchable()
                     ->sortable(),
-                Tables\Columns\SpatieMediaLibraryImageColumn::make('photo')
+                Tables\Columns\SpatieMediaLibraryImageColumn::make('avatar')
                     ->collection(MediaCollectionType::USER_PROFILE->value)
                     ->circular()
                     ->conversion(MediaConversion::SM->value)
