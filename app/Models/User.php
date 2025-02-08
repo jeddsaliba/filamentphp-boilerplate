@@ -16,15 +16,17 @@ use Illuminate\Database\Eloquent\Relations\MorphOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Laravel\Fortify\TwoFactorAuthenticatable;
 use Parallax\FilamentComments\Models\Traits\HasFilamentComments;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Spatie\Permission\Traits\HasRoles;
+use Vormkracht10\TwoFactorAuth\Enums\TwoFactorType;
 
 class User extends Authenticatable implements FilamentUser, HasAvatar, HasMedia
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasActivityLogs, HasFactory, HasFilamentComments, HasMediaConvertionRegistrations, HasPanelShield, HasRoles, Notifiable, SoftDeletes;
+    use HasActivityLogs, HasFactory, HasFilamentComments, HasMediaConvertionRegistrations, HasPanelShield, HasRoles, Notifiable, SoftDeletes, TwoFactorAuthenticatable;
 
     /**
      * The attributes that are mass assignable.
@@ -35,6 +37,7 @@ class User extends Authenticatable implements FilamentUser, HasAvatar, HasMedia
         'name',
         'email',
         'password',
+        'two_factor_type'
     ];
 
     /**
@@ -57,6 +60,7 @@ class User extends Authenticatable implements FilamentUser, HasAvatar, HasMedia
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
+            'two_factor_type' => TwoFactorType::class,
         ];
     }
 

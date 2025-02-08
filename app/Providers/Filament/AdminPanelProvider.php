@@ -66,6 +66,7 @@ class AdminPanelProvider extends PanelProvider
                 \CharrafiMed\GlobalSearchModal\GlobalSearchModalPlugin::make(),
                 \Rmsramos\Activitylog\ActivitylogPlugin::make()
                     ->navigationCountBadge(),
+                \Vormkracht10\TwoFactorAuth\TwoFactorAuthPlugin::make()->forced(),
             ])
             ->navigationGroups([
                 NavigationGroup::make(NavGroup::UM->value)

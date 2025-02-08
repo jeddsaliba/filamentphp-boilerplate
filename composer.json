@@ -11,11 +11,13 @@
         "charrafimed/global-search-modal": "^3.6",
         "filament/filament": "^3.2",
         "filament/spatie-laravel-media-library-plugin": "^3.2",
+        "laravel/fortify": "^1.25",
         "laravel/framework": "^11.31",
         "laravel/telescope": "^5.4",
         "laravel/tinker": "^2.9",
         "parallax/filament-comments": "^1.4",
         "rmsramos/activitylog": "^1.0",
+        "vormkracht10/filament-2fa": "^2.1",
         "ysfkaya/filament-phone-input": "^3.1"
     },
     "require-dev": {
