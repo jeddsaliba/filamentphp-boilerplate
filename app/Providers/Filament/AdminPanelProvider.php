@@ -94,6 +94,10 @@ class AdminPanelProvider extends PanelProvider
                                 }
                                 $component->state([((string) Str::uuid()) => $file->getKey() . '/' . $file->file_name]);
                             })
+                            ->deleteUploadedFileUsing(function () {
+                                $user = User::find(Auth::id());
+                                $user->clearMediaCollection(MediaCollectionType::USER_PROFILE->value);
+                            })
                             ->saveUploadedFileUsing(function (TemporaryUploadedFile $file) {
                                 $user = User::find(Auth::id());
                                 $user->clearMediaCollection(MediaCollectionType::USER_PROFILE->value);
