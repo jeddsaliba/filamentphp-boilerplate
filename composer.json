@@ -16,6 +16,7 @@
         "laravel/telescope": "^5.4",
         "laravel/tinker": "^2.9",
         "parallax/filament-comments": "^1.4",
+        "pxlrbt/filament-environment-indicator": "^2.1",
         "rmsramos/activitylog": "^1.0",
         "ysfkaya/filament-phone-input": "^3.1"
     },

@@ -5,6 +5,7 @@ namespace App\Providers\Filament;
 use App\Enums\MediaCollectionType;
 use App\Enums\NavGroup;
 use App\Filament\Pages\Auth\Register;
+use App\Livewire\PersonalInfo;
 use App\Models\User;
 use Filament\Forms\Components\BaseFileUpload;
 use Filament\Forms\Components\FileUpload;
@@ -80,11 +81,16 @@ class AdminPanelProvider extends PanelProvider
                         hasAvatars: true, // Enables the avatar upload form component (default = false)
                         slug: 'profile' // Sets the slug for the profile page (default = 'my-profile')
                     )
+                    ->myProfileComponents([
+                        'personal_info' => PersonalInfo::class,
+                        // UserProfileComponent::class,
+                    ])
                     ->enableTwoFactorAuthentication(
                         force: true, // force the user to enable 2FA before they can use the application (default = false)
                     )
                     ->avatarUploadComponent(function (FileUpload $fileUpload) {
                         return $fileUpload
+                            ->hiddenLabel()
                             ->afterStateHydrated(function (BaseFileUpload $component) {
                                 $user = User::find(Auth::id());
                                 $file = $user->getFirstMedia(MediaCollectionType::USER_PROFILE->value);
@@ -107,6 +113,7 @@ class AdminPanelProvider extends PanelProvider
                                 return $file->getKey() . '/' . $file->file_name;
                             });
                     }),
+                \pxlrbt\FilamentEnvironmentIndicator\EnvironmentIndicatorPlugin::make(),
                 \Rmsramos\Activitylog\ActivitylogPlugin::make()
                     ->navigationCountBadge(),
             ])

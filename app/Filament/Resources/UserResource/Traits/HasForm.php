@@ -58,10 +58,6 @@ trait HasForm
                 ->multiple()
                 ->preload()
                 ->searchable(),
-            Forms\Components\Toggle::make('is_active')
-                ->label(fn ($state) => $state ? 'Active' : 'Inactive')
-                ->inline(false)
-                ->live(),
         ];
     }
 
