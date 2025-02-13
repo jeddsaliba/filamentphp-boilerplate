@@ -120,6 +120,8 @@ class AdminPanelProvider extends PanelProvider
             ->navigationGroups([
                 NavigationGroup::make(NavGroup::UM->value)
                     ->icon(NavGroup::UM->getIcon()),
+                NavigationGroup::make(NavGroup::ST->value)
+                    ->icon(NavGroup::ST->getIcon()),
             ])
             ->databaseNotifications()
             ->maxContentWidth(MaxWidth::Full)
