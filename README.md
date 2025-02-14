@@ -53,7 +53,7 @@ Configure the `APP_URL` in your `.env` file:
 APP_URL=https://filamentphp-boilerplate.dev
 ```
 
-Configure the `Database` in your `.env` file:
+Configure the `MySQL` connection in your `.env` file:
 ```
 DB_CONNECTION=mysql
 DB_HOST=127.0.0.1
