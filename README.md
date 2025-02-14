@@ -47,14 +47,27 @@ Generate a new `.env` file by running:
 cp .env.example .env
 ```
 
-Configure your `.env` file:
+Configure the `APP_URL` in your `.env` file:
 
 ```bash
 APP_URL=https://filamentphp-boilerplate.dev
+```
 
+Configure the `Database` in your `.env` file:
+```
 DB_CONNECTION=mysql
 DB_HOST=127.0.0.1
 DB_PORT=3306
+DB_DATABASE=
+DB_USERNAME=
+DB_PASSWORD=
+```
+
+or if you're using `PostgreSQL`:
+```
+DB_CONNECTION=pgsql
+DB_HOST=127.0.0.1
+DB_PORT=5432
 DB_DATABASE=
 DB_USERNAME=
 DB_PASSWORD=
