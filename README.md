@@ -4,17 +4,23 @@
 
 ## Introduction
 
-**FilamentPHP Boilerplate** is a ready-made boilerplate designed to jump-start the development of web applications using **FilamentPHP**. It provides a pre-configured setup, essential dependencies, and best practices to accelerate your workflow.
+**FilamentPHP Boilerplate** is a powerful and flexible starting point for building robust and scalable admin dashboards. This boilerplate is designed to help developers quickly set up an admin panel with essential features, security measures, and user-friendly management tools.
 
-## Features
+Built using **FilamentPHP**, it leverages modern PHP development practices to ensure a smooth and efficient experience.
 
-- **Filament Admin Panel**: Pre-installed and configured.
-- **Authentication & User Management**: Ready-to-use authentication with roles and permissions.
-- **CRUD Operations**: Easily extendable CRUD functionalities.
-- **TailwindCSS & Livewire**: Integrated for seamless front-end development.
-- **Laravel Sanctum**: API authentication ready.
-- **Docker Support**: For simplified local development.
-- **Pre-configured Testing**: PHPUnit and Pest tests included.
+**Key Features:**
+- **User Management:** Easily manage user accounts, including registration, profile updates, and deletion.
+- **Multi-Factor Authentication (MFA):** Enhance security with optional two-factor authentication for user accounts.
+- **API Keys Management:** Enable secure storage and management of API keys and credentials, facilitating seamless integration with internal and third-party APIs.
+- **User Roles & Permissions:** Implement role-based access control (RBAC) to ensure users have the right level of access.
+- **Export Reports:** Generate and export reports in Excel (.xlsx) or CSV formats for data analysis and record-keeping.
+
+**Why Choose FilamentPHP Boilerplate?**
+- **Time-Saving:** Get started quickly with a ready-to-use admin panel instead of building from scratch.
+- **Scalability:** Designed to be easily extendable, allowing you to add more features as needed.
+- **Security Focused:** Built-in security features like MFA and role-based permissions to protect user data.
+- **User-Friendly:** Clean UI and intuitive navigation for a seamless admin experience.
+- **Open & Customizable:** Modify and extend the boilerplate according to your project’s requirements.
 
 ## Table of Contents
 [Installation](#installation)<br/>
