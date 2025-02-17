@@ -28,7 +28,6 @@ Built using **FilamentPHP**, it leverages modern PHP development practices to en
 [Database](#database)<br/>
 [Generate Filament Shield Permissions](#generate-filament-shield-permissions)<br/>
 [Create Administrator Account](#create-admin-account)<br/>
-[Generate Test Data](#generate-test-data)<br/>
 [Support](#support)
 
 <a name="installation"></a>
@@ -78,7 +77,7 @@ DB_PASSWORD=
 Assuming that you have already created an empty database, run this command to migrate the database tables:
 
 ```bash
-php artisan migrate:fresh
+php artisan migrate
 ```
 
 <a name="generate-filament-shield-permissions"></a>
@@ -95,14 +94,6 @@ In order to create an administrator account, run this command:
 
 ```bash
 php artisan shield:super-admin
-```
-
-<a name="generate-test-data"></a>
-## Generate Test Data
-You may also run this command in order to populate the database with test data:
-
-```bash
-php artisan db:seed
 ```
 
 <a name="support"></a>
