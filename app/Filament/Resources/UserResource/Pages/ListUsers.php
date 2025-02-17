@@ -85,6 +85,9 @@ class ListUsers extends ListRecords
                 Tables\Filters\TrashedFilter::make(),
             ])
             ->actions([
+                \STS\FilamentImpersonate\Tables\Actions\Impersonate::make()
+                    ->redirectTo(route('filament.admin.pages.dashboard'))
+                    ->requiresConfirmation(),
                 Tables\Actions\ActionGroup::make([
                     Tables\Actions\EditAction::make(),
                     Tables\Actions\DeleteAction::make(),
