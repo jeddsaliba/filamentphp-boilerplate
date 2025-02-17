@@ -19,6 +19,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        \Spatie\Health\Facades\Health::checks([
+            \Spatie\Health\Checks\Checks\OptimizedAppCheck::new(),
+            \Spatie\Health\Checks\Checks\DebugModeCheck::new(),
+            \Spatie\Health\Checks\Checks\EnvironmentCheck::new(),
+        ]);
     }
 }
